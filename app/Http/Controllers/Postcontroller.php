@@ -93,4 +93,11 @@ class PostController extends Controller
     $post = Post::find($id);
     return view('posts.edit', compact('post'));
   }
+  public function markAsDone(Post $post)
+{
+    $post->is_done = true;
+    $post->save();
+
+    return response()->json(['success' => true]);
+}
 }

@@ -12,9 +12,9 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-warning">
+    <nav class="navbar navbar-expand-lg navbar-light bg-secondary">
         <div class="container-fluid">
-            <a class="navbar-brand h1" href={{ route('posts.index') }}>CRUDPosts</a>
+            <a class="navbar-brand h1" href={{ route('posts.index') }}>To Do App</a>
             <div class="justify-end ">
                 <div class="col ">
                     <a class="btn btn-sm btn-success" href={{ route('posts.create') }}>Add Post</a>    

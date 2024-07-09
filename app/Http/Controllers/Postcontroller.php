@@ -27,8 +27,7 @@ class PostController extends Controller
       'body' => 'required',
     ]);
     Post::create($request->all());
-    return redirect()->route('posts.index')
-      ->with('success', 'Post created successfully.');
+    return redirect()->route('posts.index')->with('success', 'Post başarıyla oluşturuldu.');
   }
   /**
    * Update the specified resource in storage.
@@ -45,8 +44,7 @@ class PostController extends Controller
     ]);
     $post = Post::find($id);
     $post->update($request->all());
-    return redirect()->route('posts.index')
-      ->with('success', 'Post updated successfully.');
+    return redirect()->route('posts.index')->with('success', 'Post başarıyla güncellendi.');
   }
   /**
    * Remove the specified resource from storage.
@@ -58,8 +56,7 @@ class PostController extends Controller
   {
     $post = Post::find($id);
     $post->delete();
-    return redirect()->route('posts.index')
-      ->with('success', 'Post deleted successfully');
+    return redirect()->route('posts.index')->with('success', 'Post başarıyla silindi.');
   }
   // routes functions
   /**
@@ -98,6 +95,8 @@ class PostController extends Controller
     $post->is_done = true;
     $post->save();
 
-    return response()->json(['success' => true]);
+    return response()->json([
+        'success' => true
+    ]);
 }
 }

@@ -27,6 +27,15 @@
     </style>
 </head>
 <body>
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <strong class="me-auto">Bildirim</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body"></div>
+        </div>
+    </div>
     <nav class="navbar navbar-expand-lg navbar-light bg-warning">
         <div class="container-fluid">
             <a class="navbar-brand h1" href="{{ route('posts.index') }}">CRUDPosts</a>
@@ -87,11 +96,45 @@
                         if (response.success) {
                             $('#title-' + postId).addClass('done-text');
                             $('#body-' + postId).addClass('done-text');
+                            showToast(response.message);
                         }
                     }
                 });
             });
         });
     </script>
+<script>
+    function showToast(message) {
+        var toastEl = document.getElementById('liveToast');
+        var toast = new bootstrap.Toast(toastEl);
+        $('.toast-body').text(message);
+        toast.show();
+    }
+
+    // Sayfa yüklendiğinde session'daki mesajı kontrol et
+    $(document).ready(function() {
+        @if(session('success'))
+            showToast("{{ session('success') }}");
+        @endif
+
+        $('.mark-as-done').on('click', function() {
+            var postId = $(this).data('post-id');
+            $.ajax({
+                url: '/posts/' + postId + '/done',
+                type: 'POST',
+                data: {
+                    _token: $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(response) {
+                    if (response.success) {
+                        $('#title-' + postId).addClass('done-text');
+                        $('#body-' + postId).addClass('done-text');
+                        showToast("Görev başarıyla tamamlandı olarak işaretlendi.");
+                    }
+                }
+            });
+        });
+    });
+</script>
 </body>
 </html>

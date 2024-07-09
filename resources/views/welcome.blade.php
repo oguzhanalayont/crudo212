@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet"/>
         <title>Laravel</title>
 
         <!-- Fonts -->
@@ -16,6 +16,8 @@
         </style>
     </head>
     <body class="font-sans antialiased dark:bg-black dark:text-white/50">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
         <div class="bg-gray-50 text-black/50 dark:bg-black dark:text-white/50">
             <img id="background" class="absolute -left-20 top-0 max-w-[877px]" src="https://laravel.com/assets/img/welcome/background.svg" />
             <div class="relative min-h-screen flex flex-col items-center justify-center selection:bg-[#FF2D20] selection:text-white">
@@ -168,5 +170,17 @@
                 </div>
             </div>
         </div>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+        
+            <script>
+                @if(Session::has('success'))
+                    toastr.success("{{ Session::get('success') }}");
+                @endif
+        
+                @if(Session::has('error'))
+                    toastr.error("{{ Session::get('error') }}");
+                @endif
+            </script> 
     </body>
 </html>
